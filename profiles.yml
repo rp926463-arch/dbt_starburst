@@ -1,0 +1,16 @@
+dbt_starburst:
+  target: dev
+  outputs:
+    dev:
+      type: trino
+      method: ldap
+      user: <email>/accountadmin
+      password: ***
+      host: sggsorg-dbt-aws.trino.galaxy.starburst.io  # in Starburst Galaxy: "Get Connection" -> "Host"
+      port: 443
+      catalog: dbt_aws_tgt1   # the catalog in which to store transformed tables, a.k.a. dbt models
+      schema: target  # the schema in that catalog for *your* models, separate from <dbt_yourcolleague>
+      threads: 1
+      http_scheme: https
+      session_properties:
+        query_max_run_time: 4h
